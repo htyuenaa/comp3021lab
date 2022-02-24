@@ -12,7 +12,7 @@ public class NoteBook {
     public boolean insertNote(String folderName, Note note){
         Folder f = null;
         for (Folder f1: folders){
-            if (f1.getName().equals(folderName)){
+            if (f1.equals(folderName)){
                 f = f1;
                 break;
             }
@@ -23,7 +23,7 @@ public class NoteBook {
         }
 
         for (Note n: f.getNotes()){
-                if (n.getTitle().equals(note.getTitle())){
+                if (n.equals(note)){
                     System.out.println("Creating note " + note.getTitle() + " under folder " + folderName + " failed.");
                     return false;
                 }

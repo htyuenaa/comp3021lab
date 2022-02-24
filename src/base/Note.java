@@ -15,9 +15,10 @@ public class Note {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Note note = (Note) o;
-        return title.equals(note.title);
+        if(o instanceof Note){
+            return title.equals(((Note) o).getTitle());
+        }
+        return false;
     }
 
     @Override

@@ -21,10 +21,9 @@ public class Folder {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Folder folder = (Folder) o;
-        return name.equals(folder.name);
+        if(o instanceof Folder)
+            return this.name.equals((String) o);
+        return false;
     }
 
     @Override
