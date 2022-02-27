@@ -1,8 +1,7 @@
 package base;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
-public class Folder {
+public class Folder implements Comparable<Folder>{
     private ArrayList<Note> notes;
     private String name;
 
@@ -46,4 +45,37 @@ public class Folder {
         return name + ":" + nText + ":" + nImage;
     }
 
+    @Override
+    public int compareTo(Folder o) {
+        return name.compareTo(o.getName());
+    }
+
+    public void sortNotes(){
+        Collections.sort(notes);
+    }
+    private boolean contains(String content, String[] tokens, int index){
+        if(index >= tokens.length)
+            return true;
+        if(tokens[index+1].equals("or")){   // if the next token is "or" operator
+            return (content.contains(tokens[index]) || content.contains(tokens[index+2]) )&& contains(content, tokens, index+3);
+        }
+        return content.contains(tokens[index]) && contains(content, tokens, index+1);
+    }
+    public List<Note> searchNotes(String keywords){
+        List<Note> noteList = new ArrayList<>();
+        keywords = keywords.toLowerCase(Locale.ROOT);
+        String[] tokens = keywords.split(" ");
+
+        for (Note n: notes){
+            boolean condition = contains(n.getTitle().toLowerCase(Locale.ROOT), tokens, 0);
+            if(n instanceof TextNote && condition == false){
+                condition = contains(((TextNote) n).getContent().toLowerCase(Locale.ROOT), tokens, 0);
+            }
+
+            if (condition){
+                noteList.add(n);
+            }
+        }
+        return noteList;
+    }
 }
