@@ -1,10 +1,12 @@
 package base;
 import java.util.Date;
 import java.util.Objects;
+import java.io.Serializable;
 
-public class Note implements Comparable<Note>{
+public class Note implements Comparable<Note>, Serializable{
     private Date date;
     private String title;
+    private static final long serialVersionUID = 1L;
 
     public Note(String title){
         this.date = new Date(System.currentTimeMillis());
@@ -35,4 +37,5 @@ public class Note implements Comparable<Note>{
     public String toString(){
         return date.toString()+"\t"+title;
     }
+
 }
