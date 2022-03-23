@@ -56,6 +56,7 @@ public class Folder implements Comparable<Folder>, Serializable {
     public void sortNotes(){
         Collections.sort(notes);
     }
+
     private boolean contains(String content, String[] tokens, int index){
         if(index >= tokens.length)
             return true;
@@ -64,6 +65,7 @@ public class Folder implements Comparable<Folder>, Serializable {
         }
         return content.contains(tokens[index]) && contains(content, tokens, index+1);
     }
+
     public List<Note> searchNotes(String keywords){
         List<Note> noteList = new ArrayList<>();
         keywords = keywords.toLowerCase(Locale.ROOT);
@@ -71,7 +73,7 @@ public class Folder implements Comparable<Folder>, Serializable {
 
         for (Note n: notes){
             boolean condition = contains(n.getTitle().toLowerCase(Locale.ROOT), tokens, 0);
-            if(n instanceof TextNote && condition == false){
+            if(n instanceof TextNote && !condition){
                 condition = contains(((TextNote) n).getContent().toLowerCase(Locale.ROOT), tokens, 0);
             }
 
