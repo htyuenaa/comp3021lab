@@ -58,6 +58,9 @@ public class Folder implements Comparable<Folder>, Serializable {
     }
 
     private boolean contains(String content, String[] tokens, int index){
+        if (tokens.length == 1)
+            return content.contains(tokens[0]);
+
         if(index >= tokens.length)
             return true;
         if(tokens[index+1].equals("or")){   // if the next token is "or" operator
