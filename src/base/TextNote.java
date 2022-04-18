@@ -55,7 +55,7 @@ public class TextNote extends Note implements Serializable {
     public String getContent() {
         return content;
     }
-
+    public void setContent(String s){content = s;}
     /**
      * export text note to file
      *

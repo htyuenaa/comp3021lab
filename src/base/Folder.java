@@ -75,8 +75,10 @@ public class Folder implements Comparable<Folder>, Serializable {
         String[] tokens = keywords.split(" ");
 
         for (Note n: notes){
+            // search for the title first
             boolean condition = contains(n.getTitle().toLowerCase(Locale.ROOT), tokens, 0);
             if(n instanceof TextNote && !condition){
+                // if it is a text note -> search the content
                 condition = contains(((TextNote) n).getContent().toLowerCase(Locale.ROOT), tokens, 0);
             }
 
@@ -85,5 +87,14 @@ public class Folder implements Comparable<Folder>, Serializable {
             }
         }
         return noteList;
+    }
+    public boolean removeNotes(String title){
+        for(Note note: notes){
+            if(note.getTitle() == title){
+                notes.remove(note);
+                return true;
+            }
+        }
+        return false;
     }
 }
